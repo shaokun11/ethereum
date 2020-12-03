@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build":"browserify ./app.js -o ethereumlib.js"
+    "build": "browserify ./app.js -o ethereumlib.js"
   },
   "keywords": [],
   "author": "shaokun",
@@ -13,6 +13,7 @@
   "dependencies": {
     "@metamask/controllers": "^5.0.0",
     "@metamask/inpage-provider": "^7.0.0",
+    "abi-decoder": "^2.3.0",
     "bops": "^1.0.1",
     "eth-sig-util": "^3.0.0",
     "ethereum-cryptography": "^0.1.3",
