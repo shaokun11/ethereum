@@ -1,283 +1,304 @@
-const erc20Json = [
-  {
-    constant: true,
-    inputs: [],
-    name: "name",
-    outputs: [
-      {
-        name: "",
-        type: "string",
-      },
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    constant: false,
-    inputs: [
-      {
-        name: "spender",
-        type: "address",
-      },
-      {
-        name: "value",
-        type: "uint256",
-      },
-    ],
-    name: "approve",
-    outputs: [
-      {
-        name: "",
-        type: "bool",
-      },
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    constant: true,
-    inputs: [],
-    name: "totalSupply",
-    outputs: [
-      {
-        name: "",
-        type: "uint256",
-      },
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    constant: true,
-    inputs: [],
-    name: "xxx",
-    outputs: [
-      {
-        name: "",
-        type: "bytes32",
-      },
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    constant: false,
-    inputs: [
-      {
-        name: "from",
-        type: "address",
-      },
-      {
-        name: "to",
-        type: "address",
-      },
-      {
-        name: "value",
-        type: "uint256",
-      },
-    ],
-    name: "transferFrom",
-    outputs: [
-      {
-        name: "",
-        type: "bool",
-      },
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    constant: true,
-    inputs: [],
-    name: "decimals",
-    outputs: [
-      {
-        name: "",
-        type: "uint8",
-      },
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    constant: true,
-    inputs: [
-      {
-        name: "",
-        type: "address",
-      },
-    ],
-    name: "balanceOf",
-    outputs: [
-      {
-        name: "",
-        type: "uint256",
-      },
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    constant: true,
-    inputs: [],
-    name: "symbol",
-    outputs: [
-      {
-        name: "",
-        type: "string",
-      },
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    constant: false,
-    inputs: [
-      {
-        name: "to",
-        type: "address",
-      },
-      {
-        name: "value",
-        type: "uint256",
-      },
-    ],
-    name: "transfer",
-    outputs: [
-      {
-        name: "",
-        type: "bool",
-      },
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    constant: true,
-    inputs: [
-      {
-        name: "",
-        type: "address",
-      },
-      {
-        name: "",
-        type: "address",
-      },
-    ],
-    name: "allowance",
-    outputs: [
-      {
-        name: "",
-        type: "uint256",
-      },
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        name: "_totalSupply",
-        type: "uint256",
-      },
-      {
-        name: "_name",
-        type: "string",
-      },
-      {
-        name: "_symbol",
-        type: "string",
-      },
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "constructor",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        name: "from",
-        type: "address",
-      },
-      {
-        indexed: true,
-        name: "to",
-        type: "address",
-      },
-      {
-        indexed: false,
-        name: "value",
-        type: "uint256",
-      },
-    ],
-    name: "Transfer",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        name: "owner",
-        type: "address",
-      },
-      {
-        indexed: true,
-        name: "spender",
-        type: "address",
-      },
-      {
-        indexed: false,
-        name: "value",
-        type: "uint256",
-      },
-    ],
-    name: "Approval",
-    type: "event",
-  },
-];
 const Ethereum = (function () {
   let privateKey;
-  function _signSend(body, chainId, commArr) {
+  const erc_20_abi = [
+    {
+      constant: true,
+      inputs: [],
+      name: "name",
+      outputs: [
+        {
+          name: "",
+          type: "string",
+        },
+      ],
+      payable: false,
+      stateMutability: "view",
+      type: "function",
+    },
+    {
+      constant: false,
+      inputs: [
+        {
+          name: "spender",
+          type: "address",
+        },
+        {
+          name: "value",
+          type: "uint256",
+        },
+      ],
+      name: "approve",
+      outputs: [
+        {
+          name: "",
+          type: "bool",
+        },
+      ],
+      payable: false,
+      stateMutability: "nonpayable",
+      type: "function",
+    },
+    {
+      constant: true,
+      inputs: [],
+      name: "totalSupply",
+      outputs: [
+        {
+          name: "",
+          type: "uint256",
+        },
+      ],
+      payable: false,
+      stateMutability: "view",
+      type: "function",
+    },
+    {
+      constant: true,
+      inputs: [],
+      name: "xxx",
+      outputs: [
+        {
+          name: "",
+          type: "bytes32",
+        },
+      ],
+      payable: false,
+      stateMutability: "view",
+      type: "function",
+    },
+    {
+      constant: false,
+      inputs: [
+        {
+          name: "from",
+          type: "address",
+        },
+        {
+          name: "to",
+          type: "address",
+        },
+        {
+          name: "value",
+          type: "uint256",
+        },
+      ],
+      name: "transferFrom",
+      outputs: [
+        {
+          name: "",
+          type: "bool",
+        },
+      ],
+      payable: false,
+      stateMutability: "nonpayable",
+      type: "function",
+    },
+    {
+      constant: true,
+      inputs: [],
+      name: "decimals",
+      outputs: [
+        {
+          name: "",
+          type: "uint8",
+        },
+      ],
+      payable: false,
+      stateMutability: "view",
+      type: "function",
+    },
+    {
+      constant: true,
+      inputs: [
+        {
+          name: "",
+          type: "address",
+        },
+      ],
+      name: "balanceOf",
+      outputs: [
+        {
+          name: "",
+          type: "uint256",
+        },
+      ],
+      payable: false,
+      stateMutability: "view",
+      type: "function",
+    },
+    {
+      constant: true,
+      inputs: [],
+      name: "symbol",
+      outputs: [
+        {
+          name: "",
+          type: "string",
+        },
+      ],
+      payable: false,
+      stateMutability: "view",
+      type: "function",
+    },
+    {
+      constant: false,
+      inputs: [
+        {
+          name: "to",
+          type: "address",
+        },
+        {
+          name: "value",
+          type: "uint256",
+        },
+      ],
+      name: "transfer",
+      outputs: [
+        {
+          name: "",
+          type: "bool",
+        },
+      ],
+      payable: false,
+      stateMutability: "nonpayable",
+      type: "function",
+    },
+    {
+      constant: true,
+      inputs: [
+        {
+          name: "",
+          type: "address",
+        },
+        {
+          name: "",
+          type: "address",
+        },
+      ],
+      name: "allowance",
+      outputs: [
+        {
+          name: "",
+          type: "uint256",
+        },
+      ],
+      payable: false,
+      stateMutability: "view",
+      type: "function",
+    },
+    {
+      inputs: [
+        {
+          name: "_totalSupply",
+          type: "uint256",
+        },
+        {
+          name: "_name",
+          type: "string",
+        },
+        {
+          name: "_symbol",
+          type: "string",
+        },
+      ],
+      payable: false,
+      stateMutability: "nonpayable",
+      type: "constructor",
+    },
+    {
+      anonymous: false,
+      inputs: [
+        {
+          indexed: true,
+          name: "from",
+          type: "address",
+        },
+        {
+          indexed: true,
+          name: "to",
+          type: "address",
+        },
+        {
+          indexed: false,
+          name: "value",
+          type: "uint256",
+        },
+      ],
+      name: "Transfer",
+      type: "event",
+    },
+    {
+      anonymous: false,
+      inputs: [
+        {
+          indexed: true,
+          name: "owner",
+          type: "address",
+        },
+        {
+          indexed: true,
+          name: "spender",
+          type: "address",
+        },
+        {
+          indexed: false,
+          name: "value",
+          type: "uint256",
+        },
+      ],
+      name: "Approval",
+      type: "event",
+    },
+  ];
+  let rpcEndpoit;
+  let chainId = 1;
+  const txCommonArray = {
+    1: { chain: "mainnet" },
+    3: { chain: "ropsten" },
+    4: { chain: "rinkeby" },
+    5: { chain: "goerli" },
+    42: { chain: "kovan" },
+  };
+  function _signSend(body) {
     const tx = new ethereumHelper.ethereumjsTx.Transaction(
-      {
-        ...body.params[0],
-        nonce: body.nonce,
-      },
-      commArr[chainId]
+      body,
+      txCommonArray[chainId]
     );
     tx.sign(ethereumHelper.bops.from(privateKey, "hex"));
     const txStr = "0x" + tx.serialize().toString("hex");
     return txStr;
   }
 
+  function rpcRequest(payload, cb) {
+    fetch(rpcEndpoit, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ ...payload, id: 1, jsonrpc: "2.0" }),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        cb(null, res);
+      })
+      .catch((err) => {
+        cb(err.message, "");
+      });
+  }
+
   return class InnerEthereum {
     constructor(config) {
+      ethereumHelper.abiDecoder.addABI(erc_20_abi);
+      rpcEndpoit = config.url;
+      privateKey = config.privateKey.startsWith("0x")
+        ? config.privateKey.substr(2)
+        : config.privateKey;
       this.isMetaMask = false;
       this.selectedAddress = null;
       this.networkVersion = null;
       this.chainId = null;
       this.events = Object.create(null);
       this.accounts = [];
-      this.txCommonArray = {
-        1: { chain: "mainnet" },
-        3: { chain: "ropsten" },
-        4: { chain: "rinkeby" },
-        5: { chain: "goerli" },
-        42: { chain: "kovan" },
-      };
       this._handleAccountsChanged = this._handleAccountsChanged.bind(this);
       this._sendSync = this._sendSync.bind(this);
       this._rpcRequest = this._rpcRequest.bind(this);
@@ -285,41 +306,39 @@ const Ethereum = (function () {
       this.request = this.request.bind(this);
       this.send = this.send.bind(this);
       this.sendAsync = this.sendAsync.bind(this);
-      this.endpoit = config.url;
-      this.selectedAddress = config.address;
-      privateKey = config.privateKey.startsWith("0x")
-        ? config.privateKey.substr(2)
-        : config.privateKey;
+      this.selectedAddress = ethereumHelper.web3.eth.accounts.privateKeyToAccount(
+        privateKey
+      ).address;
       this.accounts.push(this.selectedAddress);
-      this._rpcRequest(
-        {
-          method: "net_version",
-          params: [],
-        },
-        (err, res) => {
-          this.chainId = res.result;
-          this.networkVersion = this.chainId;
-          if (!this.txCommonArray[+this.chainId]) {
-            this.txCommonArray[+this.chainId] = {
-              common: ethereumHelper.ethereumjsCommon.default.forCustomChain(
-                "mainnet",
-                {
-                  name: "bsc",
-                  networkId: +this.chainId,
-                  chainId: +this.chainId,
-                },
-                "petersburg"
-              ),
-            };
-          }
-          this.emit("chainChanged", this.chainId);
-          this.emit("connect", { chainId: this.chainId });
-        }
-      );
-
       setTimeout(() => {
-        this.emit("accountsChanged", this.selectedAddress);
-      });
+        this._rpcRequest(
+          {
+            method: "net_version",
+            params: [],
+          },
+          (err, res) => {
+            if (err) throw "network error";
+            this.chainId = res.result;
+            chainId = res.result;
+            this.networkVersion = this.chainId;
+            if (!txCommonArray[+res.result]) {
+              txCommonArray[+res.result] = {
+                common: ethereumHelper.ethereumjsCommon.default.forCustomChain(
+                  "mainnet",
+                  {
+                    name: "custom",
+                    networkId: +this.chainId,
+                    chainId: +this.chainId,
+                  },
+                  "petersburg"
+                ),
+              };
+            }
+            this.emit("chainChanged", this.chainId);
+            this.emit("connect", { chainId: this.chainId });
+          }
+        );
+      }, 1000);
     }
     isConnected() {
       return true;
@@ -334,6 +353,7 @@ const Ethereum = (function () {
         );
       });
     }
+
     sendAsync(payload, cb) {
       this._rpcRequest(payload, cb);
     }
@@ -365,13 +385,6 @@ const Ethereum = (function () {
     _rpcRequest(payload, callback, isInternal = false) {
       let cb = callback;
       if (!Array.isArray(payload)) {
-        if (!payload.jsonrpc) {
-          payload.jsonrpc = "2.0";
-        }
-        if (!payload.id) {
-          payload.id = 1;
-        }
-
         if (
           payload.method === "eth_accounts" ||
           payload.method === "eth_requestAccounts"
@@ -412,6 +425,7 @@ const Ethereum = (function () {
         this.events[key] = [fn];
       }
     }
+
     emit(key, data) {
       if (this.events[key]) {
         this.events[key].forEach((fn) => fn(data));
@@ -430,10 +444,43 @@ const Ethereum = (function () {
       };
     }
 
+    _setDefaultTransaciton(payload, cb) {
+      const getNocne = (address, callback) => {
+        let body = {
+          method: "eth_getTransactionCount",
+          params: [address, "latest"],
+        };
+        rpcRequest(body, callback);
+      };
+      if (!payload.params[0].gas) {
+        payload.params[0].gas = ethereumHelper.web3.utils.toHex("3000000");
+      }
+
+      if (!payload.params[0].nonce) {
+        getNocne(this.selectedAddress, (err, res) => {
+          if (err) {
+            cb(err.message, "");
+          } else {
+            payload.params[0].nonce = res.result;
+            cb(null, payload);
+          }
+        });
+      } else {
+        cb(null, payload);
+      }
+    }
+
     _handleRpc(payload, cb) {
-      // console.log('--------payload------', payload)
+      // console.log("--------payload------", payload);
+      if (
+        payload.method === "eth_requestAccounts" ||
+        payload.method === "eth_accounts"
+      ) {
+        cb(null, [this.selectedAddress]);
+        return;
+      }
       if (payload.method === "eth_sign") {
-        let hashStr = ethereumHelper.web3Utils.sha3(payload.params[1]);
+        let hashStr = ethereumHelper.web3.utils.sha3(payload.params[1]);
         let result = ethereumHelper.ethereumCryptography.ecdsaSign(
           ethereumHelper.bops.from(hashStr.substr(2), "hex"),
           ethereumHelper.bops.from(privateKey, "hex")
@@ -479,96 +526,38 @@ const Ethereum = (function () {
         return;
       }
 
-      const requst = () =>
-        fetch(this.endpoit, {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(payload),
-        })
-          .then((res) => res.json())
-          .then((res) => {
-            cb(null, res);
-          })
-          .catch((err) => {
-            cb(err.message, "");
-          });
       if (payload.method === "eth_sendTransaction") {
-        if (!payload.gas) {
-          payload.gas = "0x" + (8000000).toString(16);
-        }
-        if (!payload.gasPrice) {
-          payload.gasPrice = "0x" + (100 * 1e9).toString(16);
-        }
-        if (!payload.from) {
-          payload.from = this.selectedAddress;
-        }
-        if (!payload.value) {
-          payload.value = "0x00";
-        }
-        if (!payload.nonce) {
-          fetch(this.endpoit, {
-            method: "POST",
-            headers: {
-              "content-type": "application/json",
-            },
-            body: JSON.stringify({
-              method: "eth_getTransactionCount",
-              id: 1,
-              jsonrpc: "2.0",
-              params: [this.selectedAddress, "latest"],
-            }),
-          })
-            .then((res) => res.json())
-            .then((res) => {
-              payload.nonce = res.result;
-              let { id, jsonrpc, ...body } = payload;
-              const signStr = _signSend(body, this.chainId, this.txCommonArray);
-              return fetch(this.endpoit, {
-                method: "POST",
-                headers: {
-                  "content-type": "application/json",
-                },
-                body: JSON.stringify({
-                  method: "eth_sendRawTransaction",
-                  id: 1,
-                  jsonrpc: "2.0",
-                  params: [signStr],
-                }),
+        window.parent.api.OSWallet.showSignUI(
+          { ...payload.params[0] },
+          (code) => {
+            if (code === 1) {
+              this._setDefaultTransaciton(payload, (err, p) => {
+                if (err) {
+                  cb(err, "");
+                } else {
+                  let { id, jsonrpc, ...body } = p;
+                  const signStr = _signSend(body.params[0]);
+                  rpcRequest(
+                    {
+                      method: "eth_sendRawTransaction",
+                      params: [signStr],
+                    },
+                    cb
+                  );
+                }
               });
-            })
-            .then((tx) => tx.json())
-            .then((tx) => {
-              cb(null, tx);
-            });
-        }
-      } else {
-        requst();
+            } else {
+              cb("user reject", "");
+            }
+          }
+        );
+        return;
       }
+      rpcRequest(payload, cb);
     }
 
-    _handleAccountsChanged(
-      accounts,
-      isEthAccounts = false,
-      isInternal = false
-    ) {
-      let _accounts = accounts;
-      if (!Array.isArray(accounts)) {
-        _accounts = [];
-      }
-      this.accounts = _accounts;
-      if (this.selectedAddress !== _accounts[0]) {
-        this.selectedAddress = _accounts[0];
-      }
-      if (
-        window.web3 &&
-        window.web3.eth &&
-        typeof window.web3.eth === "object"
-      ) {
-        window.web3.eth.defaultAccount = this.selectedAddress;
-      }
-      this.emit("accountsChanged", _accounts);
+    _handleAccountsChanged() {
+      this.emit("accountsChanged", [this.selectedAddress]);
     }
 
     _sendSync(payload) {
@@ -581,14 +570,13 @@ const Ethereum = (function () {
           result = this.selectedAddress || null;
           break;
         case "eth_uninstallFilter":
-          this._rpcRequest(payload, NOOP);
           result = true;
           break;
         case "net_version":
           result = this.networkVersion || null;
           break;
         default:
-          throw new Error(messages.errors.unsupportedSync(payload.method));
+          throw new Error("unsuport method");
       }
       return {
         id: payload.id,
@@ -598,6 +586,8 @@ const Ethereum = (function () {
     }
   };
 })();
+console.log("----metamask wallet-----------");
+
 let config = {
   url: "https://rinkeby.infura.io/v3/1c352eac1b9c43139a4e481088c84de5",
   privateKey:
